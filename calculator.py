@@ -74,19 +74,20 @@ class Result(webapp2.RequestHandler):
                 return 0
 
         def getasin(url):
-            asin = re.findall(r"(?<=\/dp\/)(.*)", url)[0]
-            if not asin > '':
-                asin = re.findall(r"(?<=\/product\/)(.*)", url)[0]
-            asin = asin[:10]
-            if not len(asin) == 10:
-                raise ValueError('invalid ASIN')
-            return asin
+            asin_list = re.findall(r"((?<=(?:\/dp\/))(.[^\/|\?]*)|(?<=(?:\/product\/))(.[^\/|\?]*))", url)
+            asin_str = asin_list[0][0]
+            return asin_str
 
         def test_getasin():
-            urls = ['https://www.amazon.com/Nintendo-Switch-Gray-Joy-Con/dp/B01LTHP2ZK?tag=kasbl023-20']
+            urls = ['https://www.amazon.com/Nintendo-Switch-Gray-Joy-Con/dp/B01LTHP2ZK?tag=kasbl023-20',
+                'https://www.amazon.com/gp/product/B01GEW27DA/ref=s9_acsd_top_hd_bw_b1LPqmx_c_x_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-4&pf_rd_r=TJE17ZS2T15YFMC47VTW&pf_rd_t=101&pf_rd_p=e07c9f6e-1414-50f2-b24d-f0d822b6c30a&pf_rd_i=1232597011',
+                'https://www.amazon.com/gp/product/B01J94T4R2/ref=s9_acsd_top_hd_bw_b1LPqmx_c_x_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-4&pf_rd_r=TJE17ZS2T15YFMC47VTW&pf_rd_t=101&pf_rd_p=e07c9f6e-1414-50f2-b24d-f0d822b6c30a&pf_rd_i=1232597011',
+                'https://www.amazon.com/dp/B0106N5OOW/ref=s9_acsd_bw_wf_a_ECRouter_cdl_1?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-2&pf_rd_r=T13C28P1QDJNHF6NNJF9&pf_rd_t=101&pf_rd_p=4e5cb4ef-6898-4500-8a10-f50187471cec&pf_rd_i=12691227011',
+                'https://www.amazon.com/dp/B00PDLRHFW/ref=s9_acsd_bw_wf_a_ECRouter_cdi_0?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-2&pf_rd_r=T13C28P1QDJNHF6NNJF9&pf_rd_t=101&pf_rd_p=4e5cb4ef-6898-4500-8a10-f50187471cec&pf_rd_i=12691227011',
+                'https://www.amazon.com/Practical-Programming-Strength-Training-Rippetoe/dp/0982522754/ref=pd_rhf_se_s_vtp_ses_clicks_0_1?_encoding=UTF8&pd_rd_i=0982522754&pd_rd_r=8XGKPQHW14RSKY1A7V3Q&pd_rd_w=M1wB3&pd_rd_wg=uVf72&pf_rd_i=desktop-rhf&pf_rd_m=ATVPDKIKX0DER&pf_rd_p=4743125097998253099&pf_rd_r=8XGKPQHW14RSKY1A7V3Q&pf_rd_s=desktop-rhf&pf_rd_t=40701&psc=1&refRID=8XGKPQHW14RSKY1A7V3Q'
+            ]
             for url in urls:
                 getasin(url)
-
 
         url = self.request.GET['url']
         precio_envio = extract_number('precio envio',self.request.GET['precio_envio'])

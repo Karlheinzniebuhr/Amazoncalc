@@ -3,3 +3,5 @@
 /libs
 config.py
 *.md
+*.pyc
+test.py
