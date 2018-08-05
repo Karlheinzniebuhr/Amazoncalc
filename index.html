@@ -1,0 +1,116 @@
+<!DOCTYPE html> {% autoescape true %}
+<head>
+<meta name="description" content="El mejor calculador de precios Amazon en Paraguay">
+<meta charset=utf-8>
+<meta content="ie=edge" http-equiv=x-ua-compatible>
+<meta content="width=device-width,initial-scale=1" name=viewport>
+<title>AmazonCalc</title>
+<link href=/foundation/css/foundation.min.css rel=stylesheet>
+<link href=/foundation/css/app.css rel=stylesheet>
+</head>
+<body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=235197410277797";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+<div class=top-bar>
+    <div class=top-bar-left>
+        <ul class="menu dropdown" data-dropdown-menu>
+            <li class=menu-text>Calculador de precios Amazon Paraguay</ul>
+    </div>
+    <div class=top-bar-right>
+        <ul class=menu>
+            <ul class="menu dropdown" data-dropdown-menu>
+                <li><a href="mailto:karlbooklover@gmail.com?subject=AmazonCalc%20Feedback">Sugerencias</a></ul>
+        </ul>
+    </div>
+    <div class=top-bar-right>
+        <ul class=menu>
+            <ul class="menu dropdown" data-dropdown-menu>
+                <li><a href=https://twitter.com/NiebuhrKarl>Creador</a></ul>
+        </ul>
+    </div>
+</div>
+<form action=/result data-abide novalidate>
+    <div class="alert callout" data-abide-error style=display:none>
+        <p><i class=fi-alert></i>Hay problemas con los datos insertados!</div>
+    <div class=row>
+        <div class="columns large-12">
+            <h6>Paso 1: Ir a <a href="https://www.amazon.com/?tag=amazoncalc-20"target=_blank>Amazon.com</a> para buscar el producto, luego copiar el URL de la barra de navegación</h6></div>
+    </div>
+    <div class=row>
+        <div class="columns large-12"><label for=url>Insertar URL de Amazon</label><input name=url type=url value="{{ url }}"><span class=form-error>Favor insertar un URL valido!</span></div>
+    </div>
+    <div class=row>
+        <div class="columns large-4"><label for=precio_envio>Precio de envio por kg de EEUU a Paraguay en $ (Dolares)</label><input name=precio_envio type=number value=17 rows=1><span class=form-error>Favor insertar el precio de envio!</span></div>
+    </div>
+    <div class=row>
+        <div class="columns large-4"><label for=cotizacion>Cotizacion del Dolar</label><input name=cotizacion type=number value="{{ cotizacion }}" rows=1><span class=form-error>Favor insertar la cotizacion Dolar-Guaranies!</span></div>
+    </div>
+    <div class=row>
+        <div class="columns large-12"><button class="button expand" type=submit value="Calcular Precio">Calcular Precio</button></div>
+    </div>
+</form>
+
+{% if error %}
+  <div class=row>
+  <div class="columns large-12"><h3>Ocurrió un error con este item ☹️. Por favor enviame un correo con lo que aparece abajo para poder arreglarlo</h3></div>
+  </div>
+<div class=row>
+  <div class="columns large-12"><a href="mailto:karlbooklover@gmail.com?subject=AmazonCalc%20Error&body=" class="button alert">Enviar Error</a><br></div>
+</div>
+<div class=row>
+  <div class="columns large-12"><p style="color:red">{{ error }}</p></div>
+</div>
+{% endif %}
+
+{% if url %}
+<div class=row>
+    <div class="columns large-12">
+        <p>Precio del producto: ${{ precio_producto }} = GS {{ precio_gs }}</div>
+</div>
+<div class=row>
+    <div class="columns large-12">
+        <p>Peso de envio: {{ peso_envio }} g</div>
+</div>
+<div class=row>
+    <div class="columns large-12">
+        <p>Precio de envio: = GS {{ precio_envio_gs }}</div>
+</div>
+<div class=row>
+    <div class="columns large-12">
+        <p>Precio total: <b>GS {{ precio_total }}</b></div>
+</div>
+
+<div class=row>
+    <div class="columns large-12"><a href="{{ url }}&tag=amazoncalc-20" class="button expand success">Comprar a este precio ahora</a></div>
+</div>
+
+<!-- <div class=row>
+    <p>No tienes como comprar? Enviame un correo o mensaje y te lo compro a {{ precio_up }} Gs</p>
+    <div class="columns large-12"><a href="mailto:karlbooklover@gmail.com?subject=AmazonCalc%20Compra%20por%20{{precio_up}}&body=Hola,%20quisiera%20comprar%20{{url}}" class="button expand success">E-Mail</a> <a href="https://api.whatsapp.com/send?phone=595971888244&text=Hola,%20quisiera%20comprar%20{{url}}" class="button expand success">Whatsapp</a></div> -->
+{% endif %}
+</div>
+</div>
+
+
+<!--  Facebook Buttons -->
+<div class=row>
+    <div class="columns large-12 text-center">
+        <div class="fb-like" data-href="https://amazoncalc.appspot.com" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+    </div>
+</div>
+
+</body>
+
+<script src=/foundation/js/vendor/jquery.min.js></script>
+<script src=/foundation/js/vendor/what-input.js></script>
+<script src=/foundation/js/vendor/foundation.min.js></script>
+<script src=/foundation/js/app.js></script>{% endautoescape %}
+
+</html>
