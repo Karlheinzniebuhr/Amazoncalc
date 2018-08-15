@@ -1,0 +1,6 @@
+dev_appserver.py .\app.yaml
+
+gcloud app deploy
+
+gcloud app versions list
+gcloud app versions delete v1 v2
