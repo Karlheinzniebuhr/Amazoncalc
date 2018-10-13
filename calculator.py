@@ -52,6 +52,7 @@ class MainPage(webapp2.RequestHandler):
 
         template_values = {
             'cotizacion': cotizacion,
+            'precio_envio': 18,
         }
 
         template = JINJA_ENVIRONMENT.get_template('index.html')
